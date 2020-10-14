@@ -414,9 +414,10 @@ passport.use(
 app.get("/login/naver", passport.authenticate("naver"));
 app.use(passport.initialize());
 
-app.get("https://weberyday.netlify.app/login/naver/callback", function (req, res, next) {
-  passport.authenticate("naver", function (err, user) {
-    alert("lalalala")
+app.get("/login/naver/callback", function (req, res, next) {
+console.log("1");  
+passport.authenticate("naver", function (err, user) {
+  console.log("2");
     if (!user) {
       return res.redirect("https://weberyday.netlify.app/naverLogin/fail");
     }
