@@ -26,7 +26,7 @@ _dotenv["default"].config({
   path: _path["default"].join(__dirname, "../.env")
 });
 
-var port = 5000;
+var port = process.env.PORT || 5000;
 var s3 = new _awsSdk["default"].S3({
   accessKeyId: process.env.AWS_KEY,
   secretAccessKey: process.env.AWS_PRIVATE_KEY,

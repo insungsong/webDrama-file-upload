@@ -14,7 +14,7 @@ app.use(cors());
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
-const port = 5000;
+const port =  process.env.PORT || 5000;
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_KEY,
