@@ -7,9 +7,11 @@ import path from "path";
 import dotenv from "dotenv";
 import Cookie from "js-cookie";
 import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
 
 const app = express();
 app.use(cookieParser());
+app.use(bodyParser.json());
 
 // http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
 app.use(cors());
