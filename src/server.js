@@ -423,7 +423,7 @@ passport.authenticate("naver", function (err, user) {
     req.logIn(user, function (err) {
       const current_NaverUser = user._json.email;
 
-      res.cookie("current_NaverUser", current_NaverUser);
+      res.cookie("current_NaverUser", current_NaverUser, {secure:true,httpOnly:false});
       return res.redirect(`https://weberyday.netlify.app/#/${current_NaverUser}`);
     });
   })(req, res);
