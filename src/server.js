@@ -416,9 +416,7 @@ app.get("/login/naver", passport.authenticate("naver"));
 app.use(passport.initialize());
 
 app.get("/login/naver/callback", function (req, res, next) {
-console.log("asdasdasd123123");  
 passport.authenticate("naver", function (err, user) {
-    console.log("1");
     if (!user) {
       return res.redirect("https://weberyday.netlify.app/naverLogin/fail");
     }
@@ -426,7 +424,7 @@ passport.authenticate("naver", function (err, user) {
       const current_NaverUser = user._json.email;
 
       res.cookie("current_NaverUser", current_NaverUser);
-      return res.redirect("https://weberyday.netlify.app/#/");
+      return res.redirect(`https://weberyday.netlify.app/${current_NaverUser}`);
     });
   })(req, res);
 });
