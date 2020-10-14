@@ -383,8 +383,7 @@ passport.use(
 app.get("/login/kakao", passport.authenticate("kakao"));
 app.use(passport.initialize());
 
-app.get("https://weberyday.netlify.app/login/kakao/callback", function (req, res, next) {
-  console.log("kakao들어옴")
+app.get("/login/kakao/callback", function (req, res, next) {
   passport.authenticate("kakao", function (err, user) {
     if (!user) {
       return res.redirect("https://weberyday.netlify.app/kakaoLogin/fail");
@@ -416,10 +415,10 @@ app.get("/login/naver", passport.authenticate("naver"));
 app.use(passport.initialize());
 
 app.get("/login/naver/callback", function (req, res, next) {
-  console.log("naver들어옴")
   passport.authenticate("naver", function (err, user) {
+    alert("lalalala")
     if (!user) {
-      return res.redirect("/naverLogin/fail");
+      return res.redirect("https://weberyday.netlify.app/naverLogin/fail");
     }
     req.logIn(user, function (err) {
       const current_NaverUser = user._json.email;
