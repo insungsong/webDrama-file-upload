@@ -12,8 +12,8 @@ const app = express();
 
 app.use(sslRedirect())
 
-// http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
-app.use(cors());
+//  http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
+// app.use(cors());
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
