@@ -53,7 +53,8 @@ const notificaitonUpload = episodeMulterBoth.single("imgFile");
 
 //작품을 등록하려고 했다가 토큰을 조작하여 그냥 바로 redirect시키기 위한 코드
 app.post("/", (req, res, next) => {
-  res.redirect("https://weberyday.netlify.app/#/#");
+  console.log("50000");
+  res.redirect("https://weberyday.netlify.app/");
 });
 
 //작품 등록할때
