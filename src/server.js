@@ -414,7 +414,7 @@ passport.use(
 app.get("/login/naver", passport.authenticate("naver"));
 app.use(passport.initialize());
 
-app.post("/login/naver/callback", function (req, res, next) {
+app.get("/login/naver/callback", function (req, res, next) {
 console.log("1");  
 passport.authenticate("naver", function (err, user) {
   console.log("2");
