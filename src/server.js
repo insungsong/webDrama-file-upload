@@ -6,8 +6,10 @@ import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 import Cookie from "js-cookie";
+import cookieParser from "cookie-parser";
 
 const app = express();
+app.use(cookieParser());
 
 // http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
 app.use(cors());
