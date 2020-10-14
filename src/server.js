@@ -380,7 +380,7 @@ passport.use(
   )
 );
 
-app.get("/login/kakao", passport.authenticate("kakao"));
+app.get("https://weberyday.netlify.app/login/kakao", passport.authenticate("kakao"));
 app.use(passport.initialize());
 
 app.get("https://weberyday.netlify.app/login/kakao/callback", function (req, res, next) {
