@@ -13,7 +13,12 @@ const app = express();
 app.use(sslRedirect())
 
 //  http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
-// app.use(cors());
+const corsOptions = {
+  origin: 'https://weberyday.netlify.app/', // 허락하고자 하는 요청 주소
+  credentials: true, // true로 하면 설정한 내용을 response 헤더에 추가 해줍니다.
+};
+
+app.use(cors(corsOptions));
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
