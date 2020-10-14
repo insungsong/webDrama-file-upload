@@ -6,16 +6,11 @@ import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 import Cookie from "js-cookie";
-import sslRedirect from "heroku-ssl-redirect";
 
 const app = express();
 
 // http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
-app.use(sslRedirect([
-  'other',
-  'development',
-  'production'
-  ]));
+app.use(cors());
 
 dotenv.config({ path: path.join(__dirname, "../.env") });
 
@@ -58,7 +53,7 @@ const notificaitonUpload = episodeMulterBoth.single("imgFile");
 
 //작품을 등록하려고 했다가 토큰을 조작하여 그냥 바로 redirect시키기 위한 코드
 app.post("/", (req, res, next) => {
-  res.redirect("https://weberyday.netlify.app/");
+  res.redirect("https://weberyday.netlify.app/#/#");
 });
 
 //작품 등록할때
@@ -72,7 +67,7 @@ app.post("/uploadPost", postUploadboth, function (req, res, next) {
   res.cookie("s3PostThumnailId", value[0].key);
   res.cookie("s3PostBackgroundImgId", value[1].key);
 
-  res.redirect(`https://weberyday.netlify.app/myPostList`);
+  res.redirect(`https://weberyday.netlify.app/#/#/myPostList`);
 });
 
 //작품수정할때
@@ -149,7 +144,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
     });
   }
 
-  res.redirect(`https://weberyday.netlify.app/myPostList/${postId}`);
+  res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}`);
 });
 
 //작품 삭제할때
@@ -190,7 +185,7 @@ app.post("/uploadEpisode/:id", episodeUploadboth, function (req, res, next) {
   res.cookie("s3EpisodeImgFile", value[0].key);
   res.cookie("s3VideoFile", value[1].key);
 
-  res.redirect(`https://weberyday.netlify.app/myPostList/${postId}`);
+  res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}`);
 });
 
 //작품 회차 수정할때
@@ -267,7 +262,7 @@ app.post("/updateEpisode/:id", episodeUploadboth, function (req, res, next) {
     });
   }
 
-  res.redirect(`https://weberyday.netlify.app/episodeUpdate/${episodeId}`);
+  res.redirect(`https://weberyday.netlify.app/#/episodeUpdate/${episodeId}`);
 });
 
 //회차 삭제 s3코드
@@ -297,7 +292,7 @@ app.post("/deleteEpisode/:id", function (req, res, next) {
     else console.log("data", data);
   });
 
-  res.redirect(`https://weberyday.netlify.app/myPostList/${postId}`);
+  res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}`);
 });
 
 //관리자 알림 이미지 업로드
@@ -317,7 +312,7 @@ app.post("/notificationManage", notificaitonUpload, function (req, res, next) {
   res.cookie("notificationImgFile", value.location);
   res.cookie("s3NotificationImgFile", value.key);
 
-  res.redirect(`https://weberyday.netlify.app/notificationManage`);
+  res.redirect(`https://weberyday.netlify.app/#/notificationManage`);
 });
 
 //알림 수정 할때
@@ -347,7 +342,7 @@ app.post("/notificationUpdateManage", notificaitonUpload, function (
     });
   }
 
-  res.redirect(`https://weberyday.netlify.app/notificationManage`);
+  res.redirect(`https://weberyday.netlify.app/#/notificationManage`);
 });
 
 //알림 삭제할때
@@ -365,7 +360,7 @@ app.post("/notificationDelete", (req, res, next) => {
     else console.log("data", data);
   });
 
-  res.redirect(`https://weberyday.netlify.app/notificationManage`);
+  res.redirect(`https://weberyday.netlify.app/#/notificationManage`);
 });
 
 //카카오로그인
@@ -391,12 +386,12 @@ app.use(passport.initialize());
 app.get("/login/kakao/callback", function (req, res, next) {
   passport.authenticate("kakao", function (err, user) {
     if (!user) {
-      return res.redirect("https://weberyday.netlify.app/kakaoLogin/fail");
+      return res.redirect("https://weberyday.netlify.app/#/kakaoLogin/fail");
     }
     req.logIn(user, function (err) {
       const current_kakaoUser = user._json.kakao_account.email;
       res.cookie("current_kakaoUser", current_kakaoUser);
-      return res.redirect("https://weberyday.netlify.app/");
+      return res.redirect("https://weberyday.netlify.app/#/");
     });
   })(req, res);
 });
@@ -424,13 +419,13 @@ console.log("1");
 passport.authenticate("naver", function (err, user) {
     console.log("1");
     if (!user) {
-      return res.redirect("https://weberyday.netlify.app/naverLogin/fail");
+      return res.redirect("https://weberyday.netlify.app/#/naverLogin/fail");
     }
     req.logIn(user, function (err) {
       const current_NaverUser = user._json.email;
 
       res.cookie("current_NaverUser", current_NaverUser);
-      return res.redirect("https://weberyday.netlify.app/");
+      return res.redirect("https://weberyday.netlify.app/#/");
     });
   })(req, res);
 });
@@ -483,7 +478,7 @@ app.get(
 app.get("/auth/facebook/callback", function (req, res, next) {
   passport.authenticate("facebook", function (err, user) {
     if (!user) {
-      return res.redirect("https://weberyday.netlify.app/facebookLogin/fail");
+      return res.redirect("https://weberyday.netlify.app/#/facebookLogin/fail");
     }
     req.logIn(user, function (err) {
       let fbEmail = "";
