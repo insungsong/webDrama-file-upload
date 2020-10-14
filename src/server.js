@@ -380,7 +380,7 @@ passport.use(
   )
 );
 
-app.get("https://weberyday.netlify.app/login/kakao", passport.authenticate("kakao"));
+app.get("/login/kakao", passport.authenticate("kakao"));
 app.use(passport.initialize());
 
 app.get("https://weberyday.netlify.app/login/kakao/callback", function (req, res, next) {
@@ -412,7 +412,7 @@ passport.use(
     }
   )
 );
-app.get("https://weberyday.netlify.app/login/naver", passport.authenticate("naver"));
+app.get("/login/naver", passport.authenticate("naver"));
 app.use(passport.initialize());
 
 app.get("https://weberyday.netlify.app/login/naver/callback", function (req, res, next) {
