@@ -8,7 +8,6 @@ import dotenv from "dotenv";
 import Cookie from "js-cookie";
 
 const app = express();
-var router = app.router
 
 // http://localhost:3000(frontend에서 localhost:5000이 들어오게 하는것을 허락하는 코드)
 app.use(cors());
@@ -418,7 +417,7 @@ app.use(passport.initialize());
 app.get("/login/naver/callback", function (req, res, next) {
 console.log("1");  
 passport.authenticate("naver", function (err, user) {
-  console.log("2");
+    console.log("1");
     if (!user) {
       return res.redirect("https://weberyday.netlify.app/naverLogin/fail");
     }
