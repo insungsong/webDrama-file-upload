@@ -8,7 +8,8 @@ import dotenv from "dotenv";
 import Cookie from "js-cookie";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import window from "window";
+import cookie from "cookie";
+
 
 const app = express();
 app.use(cookieParser());
@@ -432,10 +433,7 @@ passport.authenticate("naver", function  (err, user) {
       //res.cookie("current_NaverUser", current_NaverUser, {domain:"weberyday.netlify.app",path:"/",secure:true});
 
       try{
-        
-        const {document} = new window();
-        console.log(document);
-        document.cookie = `current_NaverUser=${current_NaverUser};Domain=weberyday.netlify.app;Path=/;Secure`;
+        res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser));
       }catch(e){
         console.log("lalalla")
         console.log(e);
