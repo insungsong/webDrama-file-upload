@@ -50,10 +50,19 @@ const notificationMulter = multer({
   })
 });
 
+const bannerMulterBoth = multer({
+  storage: multerS3({
+    s3,
+    acl: "public-read",
+    bucket: "weberyday-test"
+  })
+});
+
 //const uploadImage = postMulterBoth.single("imgFile");
 const postUploadboth = postMulterBoth.any();
 const episodeUploadboth = episodeMulterBoth.any();
 const notificaitonUpload = episodeMulterBoth.single("imgFile");
+const bannerUploadboth = bannerMulterBoth.any();
 
 //작품을 등록하려고 했다가 토큰을 조작하여 그냥 바로 redirect시키기 위한 코드
 app.post("/", (req, res, next) => {
@@ -304,15 +313,6 @@ app.post("/deleteEpisode/:id", function (req, res, next) {
 app.post("/notificationManage", notificaitonUpload, function (req, res, next) {
   const value = req.file;
 
-  // const notificationTitle = req.query.notificationTitle;
-  // const notificationText = req.query.notificationText;
-  // const notificationURL = req.query.notificationURL;
-  // console.log(notificationTitle, notificationText, notificationURL);
-
-  // res.cookie("notificationTitle", notificationTitle);
-  // res.cookie("notificationText", notificationText);
-  // res.cookie("notificationURL", notificationURL);
-
   //s3에 저장될 cookie를 생성
   res.cookie("notificationImgFile", value.location);
   res.cookie("s3NotificationImgFile", value.key);
@@ -426,6 +426,7 @@ passport.authenticate("naver", function (err, user) {
     }
     req.logIn(user, function (err) {
       const current_NaverUser = user._json.email;
+      console.log(current_NaverUser);
 
       res.cookie("current_NaverUser", current_NaverUser, {secure:true});
       return res.redirect(`https://weberyday.netlify.app/#/`);
@@ -495,6 +496,48 @@ app.get("/auth/facebook/callback", function (req, res, next) {
       }
     });
   })(req, res);
+});
+
+//배너 CRUD
+app.post("/bannerManage", bannerUploadboth, function (req, res, next) {
+  const file = req.files[0];
+
+  try {
+    if (req.query.image !== undefined) {
+      const dbS3BannerKey = req.query.imageKey;
+
+      let params = {
+        Bucket: "weberyday-test",
+        Key: dbS3BannerKey
+      };
+
+      s3.deleteObject(params, (err, data) => {
+        if (err) console.log("error", err, err.stack);
+        else console.log("data : ", data);
+      });
+    }
+
+    const dbS3BannerKey = req.query.imageKey;
+
+    if (file !== undefined) {
+      res.cookie("banner=" + file.location);
+      res.cookie("bannerImageKey=" + file.key);
+
+      let params = {
+        Bucket: "weberyday-test",
+        Key: dbS3BannerKey
+      };
+
+      s3.deleteObject(params, (err, data) => {
+        if (err) console.log("error", err, err.stack);
+        else console.log("data : ", data);
+      });
+    }
+  } catch (e) {
+    console.log(e);
+  }
+
+  return res.redirect("http://localhost:3000/bannerManage");
 });
 
 app.listen(port, () =>
