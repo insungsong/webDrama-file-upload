@@ -430,7 +430,11 @@ passport.authenticate("naver", function  (err, user) {
 
       //res.cookie("current_NaverUser", current_NaverUser, {domain:"weberyday.netlify.app",path:"/",secure:true});
 
-      document.cookie = `current_NaverUser=${current_NaverUser};Domain=weberyday.netlify.app;Path=/;Secure`;
+      try{
+        document.cookie = `current_NaverUser=${current_NaverUser};Domain=weberyday.netlify.app;Path=/;Secure`;
+      }catch(e){
+        console.log(e);
+      }
 
       return res.redirect(`https://weberyday.netlify.app/#/`);
     });
