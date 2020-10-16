@@ -11,6 +11,7 @@ import bodyParser from "body-parser";
 import cookie from "cookie";
 
 
+
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -433,7 +434,7 @@ passport.authenticate("naver", function  (err, user) {
       //res.cookie("current_NaverUser", current_NaverUser, {domain:"weberyday.netlify.app",path:"/",secure:true});
 
       try{
-        res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser));
+        res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser,{domain:"https://weberyday.netlify.app/#/"}));
       }catch(e){
         console.log("lalalla")
         console.log(e);
