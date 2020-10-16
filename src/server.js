@@ -434,7 +434,7 @@ passport.authenticate("naver", function  (err, user) {
       //res.cookie("current_NaverUser", current_NaverUser, {domain:"weberyday.netlify.app",path:"/",secure:true});
 
       try{
-        res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser,{domain:"https://weberyday.netlify.app/#/"}));
+        res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUsers));
       }catch(e){
         console.log("lalalla")
         console.log(e);
