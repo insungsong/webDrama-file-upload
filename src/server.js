@@ -388,10 +388,9 @@ passport.use(
 );
 
 app.get("/login/kakao", passport.authenticate("kakao"));
-//app.use(passport.initialize());
+app.use(passport.initialize());
 
 app.get("/login/kakao/callback", function (req, res, next) {
-  console.log(req);
   passport.authenticate("kakao", function (err, user) {
     if (!user) {
       return res.redirect("https://weberyday.netlify.app/#/kakaoLogin/fail");
