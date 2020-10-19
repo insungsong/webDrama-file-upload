@@ -68,13 +68,13 @@ const bannerUploadboth = bannerMulterBoth.any();
 
 //작품을 등록하려고 했다가 토큰을 조작하여 그냥 바로 redirect시키기 위한 코드
 app.post("/", (req, res, next) => {
-  console.log("50000");
   res.redirect("https://weberyday.netlify.app/");
 });
 
 //작품 등록할때
 app.post("/uploadPost", postUploadboth, function (req, res, next) {
   const value = req.files;
+  console.log(value);
 
   res.cookie("postThumnail", value[0].location);
   res.cookie("postBackgroundImg", value[1].location);
