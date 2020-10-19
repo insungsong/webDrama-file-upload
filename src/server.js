@@ -428,19 +428,8 @@ passport.authenticate("naver", function  (err, user) {
     }
     req.logIn(user, function (err) {
       const current_NaverUser = user._json.email;
-      console.log(current_NaverUser);
-
-      //res.cookie("current_NaverUser", current_NaverUser, {domain:"weberyday.netlify.app",path:"/",secure:true});
-
-      try{
-        res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser));
-        console.log("들어오니?");
-        res.header("current_NaverUser", current_NaverUser);
-      }catch(e){
-        console.log(e);
-      }
-
-      return res.redirect(`https://weberyday.netlify.app/#/`);
+      
+      return res.redirect(`https://weberyday.netlify.app/#/?current_NaverUser=${current_NaverUser}`);
     });
   })(req, res);
 });
