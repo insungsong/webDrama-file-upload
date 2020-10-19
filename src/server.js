@@ -95,8 +95,9 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   //s3에서 있는 기존의 내용을 삭제하기 위함
   const dbS3Thumbnail = req.query.s3Thumbnail;
   const dbS3BackgroundImage = req.query.s3BackgroundImage;
-  console.log(value[0].fieldname);
 
+  console.log(value);
+  console.log(value[0].location);
   if (value.length === 1) {
     if (value[0].fieldname === "postThumnail") {
       res.cookie("postThumnail", value[0].location);
@@ -166,7 +167,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
     });
     res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&postBackgroundImg=${value[1].location}&s3PostThumnailId=${value[0].key}&s3PostBackgroundImgId=${value[1].key}`);
   }
-  res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&postBackgroundImg=${value[1].location}&s3PostThumnailId=${value[0].key}&s3PostBackgroundImgId=${value[1].key}`);
+  
 
 });
 
