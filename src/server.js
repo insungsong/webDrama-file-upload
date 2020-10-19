@@ -397,8 +397,8 @@ app.get("/login/kakao/callback", function (req, res, next) {
     }
     req.logIn(user, function (err) {
       const current_kakaoUser = user._json.kakao_account.email;
-      res.cookie("current_kakaoUser", current_kakaoUser);
-      return res.redirect(`https://weberyday.netlify.app/#/?current_NaverUser=${current_kakaoUser}`);
+      
+      return res.redirect(`https://weberyday.netlify.app/#/?current_kakaoUser=${current_kakaoUser}`);
     });
   })(req, res);
 });
