@@ -120,7 +120,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
 
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
-    if (value[0].fieldname === "postBackgroundImg") {
+    else if (value[0].fieldname === "postBackgroundImg") {
       res.cookie("postBackgroundImg", value[0].location);
       res.cookie("s3PostBackgroundImgId", value[0].key);
 
