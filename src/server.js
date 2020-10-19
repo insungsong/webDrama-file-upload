@@ -95,6 +95,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   //s3에서 있는 기존의 내용을 삭제하기 위함
   const dbS3Thumbnail = req.query.s3Thumbnail;
   const dbS3BackgroundImage = req.query.s3BackgroundImage;
+  console.log(value[0].fieldname);
 
   if (value.length === 1) {
     if (value[0].fieldname === "postThumnail") {
