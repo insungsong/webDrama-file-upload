@@ -83,7 +83,7 @@ app.post("/uploadPost", postUploadboth, function (req, res, next) {
   res.cookie("s3PostThumnailId", value[0].key);
   res.cookie("s3PostBackgroundImgId", value[1].key);
 
-  res.redirect(`https://weberyday.netlify.app/#/#/myPostList`);
+  res.redirect(`https://weberyday.netlify.app/#/myPostList`);
 });
 
 //작품수정할때
@@ -434,8 +434,10 @@ passport.authenticate("naver", function  (err, user) {
 
       try{
         res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser));
+        res.cookie("current_NaverUser", current_NaverUser);
+        Cookie.set("current_NaverUser", current_NaverUser);
+
       }catch(e){
-        console.log("lalalla")
         console.log(e);
       }
 
