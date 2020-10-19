@@ -489,10 +489,10 @@ app.get("/auth/facebook/callback", function (req, res, next) {
       if (user._json.email !== undefined && user._json.email !== "") {
         fbEmail = user._json.email;
         Cookie.set("current_FacebookUser", fbEmail);
-        return res.redirect(`http://localhost:3000?fbEmail=${fbEmail}`);
+        return res.redirect(`https://weberyday.netlify.app/#/?fbEmail=${fbEmail}`);
       } else {
         Cookie.set("current_FacebookUser", user.id);
-        return res.redirect(`http://localhost:3000?fbEmail=${user.id}`);
+        return res.redirect(`https://weberyday.netlify.app/#/?fbEmail=${user.id}`);
       }
     });
   })(req, res);
