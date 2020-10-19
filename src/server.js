@@ -434,9 +434,7 @@ passport.authenticate("naver", function  (err, user) {
 
       try{
         res.setHeader('Set-Cookie',cookie.serialize("current_NaverUser",current_NaverUser));
-        res.cookie("current_NaverUser", current_NaverUser);
-        Cookie.set("current_NaverUser", current_NaverUser);
-
+        res.header("current_NaverUser", current_NaverUser);
       }catch(e){
         console.log(e);
       }
