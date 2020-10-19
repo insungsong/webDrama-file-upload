@@ -76,6 +76,7 @@ app.post("/uploadPost", postUploadboth, function (req, res, next) {
   const value = req.files;
   console.log(value);
 
+  //s3에 업로드된 정보들
   res.cookie("postThumnail", value[0].location);
   res.cookie("postBackgroundImg", value[1].location);
 
@@ -83,7 +84,7 @@ app.post("/uploadPost", postUploadboth, function (req, res, next) {
   res.cookie("s3PostThumnailId", value[0].key);
   res.cookie("s3PostBackgroundImgId", value[1].key);
 
-  res.redirect(`https://weberyday.netlify.app/#/myPostList`);
+  res.redirect(`https://weberyday.netlify.app/#/myPostList?postThumnail=${value[0].location}&postBackgroundImg=${value[1].location}&s3PostThumnailId=${value[0].key}&s3PostBackgroundImgId=${value[1].key}`);
 });
 
 //작품수정할때
