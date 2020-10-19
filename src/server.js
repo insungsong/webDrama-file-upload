@@ -91,7 +91,6 @@ app.post("/uploadPost", postUploadboth, function (req, res, next) {
 app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   let postId = req.url.split("/")[2];
   const value = req.files;
-  console.log(value);
 
   //s3에서 있는 기존의 내용을 삭제하기 위함
   const dbS3Thumbnail = req.query.s3Thumbnail;
