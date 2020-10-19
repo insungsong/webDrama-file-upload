@@ -391,13 +391,14 @@ app.get("/login/kakao", passport.authenticate("kakao"));
 app.use(passport.initialize());
 
 app.get("/login/kakao/callback", function (req, res, next) {
+  console.log(req);
   passport.authenticate("kakao", function (err, user) {
     if (!user) {
       return res.redirect("https://weberyday.netlify.app/#/kakaoLogin/fail");
     }
     req.logIn(user, function (err) {
       const current_kakaoUser = user._json.kakao_account.email;
-      
+
       return res.redirect(`https://weberyday.netlify.app/#/?current_kakaoUser=${current_kakaoUser}`);
     });
   })(req, res);
