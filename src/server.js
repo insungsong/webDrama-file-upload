@@ -114,6 +114,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         // an error occurred
         else console.log("data", data);
       });
+
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
     if (value[0].fieldname === "postBackgroundImg") {
@@ -133,6 +134,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         // an error occurred
         else console.log("data", data);
       });
+
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postBackgroundImg=${value[0].location}&s3PostBackgroundImgId=${value[0].key}`);
     }
   } else {
@@ -163,6 +165,8 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
     });
     res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&postBackgroundImg=${value[1].location}&s3PostThumnailId=${value[0].key}&s3PostBackgroundImgId=${value[1].key}`);
   }
+  res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&postBackgroundImg=${value[1].location}&s3PostThumnailId=${value[0].key}&s3PostBackgroundImgId=${value[1].key}`);
+
 });
 
 //작품 삭제할때
