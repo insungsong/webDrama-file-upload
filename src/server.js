@@ -8,8 +8,6 @@ import dotenv from "dotenv";
 import Cookie from "js-cookie";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import cookie from "cookie";
-
 
 const app = express();
 app.use(cookieParser());
@@ -96,10 +94,8 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   const dbS3Thumbnail = req.query.s3Thumbnail;
   const dbS3BackgroundImage = req.query.s3BackgroundImage;
 
-  console.log(value);
-  console.log(value[0].location);
-  console.log(value.length);
   if (value.length === 1) {
+console.log("1111");
     if (value[0].fieldname === "postThumnail") {
       var params = {
         Bucket: "weberyday-test",
@@ -135,6 +131,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postBackgroundImg=${value[0].location}&s3PostBackgroundImgId=${value[0].key}`);
     }
   } else {
+    console.log("222");
     res.cookie("postThumnail", value[0].location);
     res.cookie("postBackgroundImg", value[1].location);
     res.cookie("s3PostThumnailId", value[0].key);
