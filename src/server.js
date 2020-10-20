@@ -107,9 +107,9 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         else console.log("data", data);
       });
 
-      const URL = `https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`;
+      const URL = `https://weberyday.netlify.app/#/myPostList/?postThumnail&s3PostThumnailId`;
       console.log(URL);
-      
+
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
     else if (value[0].fieldname === "postBackgroundImg") {
