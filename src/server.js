@@ -116,6 +116,10 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         else console.log("data", data);
       });
 
+      req.url = "";
+      req.originalUrl ="";
+      req.path = "";
+      
       
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
