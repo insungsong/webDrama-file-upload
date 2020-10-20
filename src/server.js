@@ -95,7 +95,6 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   const dbS3BackgroundImage = req.query.s3BackgroundImage;
 
   if (value.length === 1) {
-console.log("1111");
     if (value[0].fieldname === "postThumnail") {
       var params = {
         Bucket: "weberyday-test",
@@ -108,6 +107,9 @@ console.log("1111");
         else console.log("data", data);
       });
 
+      const URL = `https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`;
+      console.log(URL);
+      
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
     else if (value[0].fieldname === "postBackgroundImg") {
