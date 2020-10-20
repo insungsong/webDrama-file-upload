@@ -115,13 +115,8 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         // an error occurred
         else console.log("data", data);
       });
-
-      req.url = "";
-      req.originalUrl ="";
-      req.path = "";
-      
-      
-      res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
+      res.redirect(`/resetURL?postId=${postId}&postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);    
+      //res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
     else if (value[0].fieldname === "postBackgroundImg") {
       res.cookie("postBackgroundImg", value[0].location);
@@ -549,6 +544,11 @@ app.post("/bannerManage", bannerUploadboth, function (req, res, next) {
 
   return res.redirect("http://localhost:3000/bannerManage");
 });
+
+app.get("/resetURL",(req,res)=>{
+  console.log(req.query);
+  res.send(req.query);
+})
 
 app.listen(port, () =>
   console.log(`🔥Listening on Server: http//localhost:${port}🍓`)
