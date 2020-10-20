@@ -88,7 +88,8 @@ app.post("/uploadPost", postUploadboth, function (req, res, next) {
 //작품수정할때
 app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   console.log(req.url);
-  let postId = req.url.split("/")[2];
+  let postId = req.url.split("/")[2].split("?")[0];
+  console.log(postId);
   const value = req.files;
 console.log(value);
   //s3에서 있는 기존의 내용을 삭제하기 위함
