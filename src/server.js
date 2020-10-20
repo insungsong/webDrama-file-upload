@@ -101,12 +101,6 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   console.log(value.length);
   if (value.length === 1) {
     if (value[0].fieldname === "postThumnail") {
-      res.cookie("postThumnail", value[0].location);
-      res.cookie("s3PostThumnailId", value[0].key);
-
-      res.cookie("postBackgroundImg", "");
-      res.cookie("s3PostBackgroundImgId", "");
-
       var params = {
         Bucket: "weberyday-test",
         Key: dbS3Thumbnail
@@ -118,7 +112,8 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         else console.log("data", data);
       });
 
-      res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
+      //`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`
+      res.redirect(new URL(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`));
     }
     else if (value[0].fieldname === "postBackgroundImg") {
       res.cookie("postBackgroundImg", value[0].location);
