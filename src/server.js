@@ -95,8 +95,10 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
   //s3에서 있는 기존의 내용을 삭제하기 위함
   const dbS3Thumbnail = req.query.s3Thumbnail;
   const dbS3BackgroundImage = req.query.s3BackgroundImage;
-  console.log(req);
 
+  console.log(value);
+  console.log(value[0].location);
+  console.log(value.length);
   if (value.length === 1) {
     if (value[0].fieldname === "postThumnail") {
       res.cookie("postThumnail", value[0].location);
@@ -115,8 +117,8 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
         // an error occurred
         else console.log("data", data);
       });
-      res.redirect(`/resetURL?postId=${postId}&postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);    
-      //res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
+
+      res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
     else if (value[0].fieldname === "postBackgroundImg") {
       res.cookie("postBackgroundImg", value[0].location);
@@ -544,11 +546,6 @@ app.post("/bannerManage", bannerUploadboth, function (req, res, next) {
 
   return res.redirect("http://localhost:3000/bannerManage");
 });
-
-app.get("/resetURL",(req,res)=>{
-  console.log(req.query);
-  res.send(req.query);
-})
 
 app.listen(port, () =>
   console.log(`🔥Listening on Server: http//localhost:${port}🍓`)
