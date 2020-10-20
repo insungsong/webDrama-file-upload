@@ -113,7 +113,7 @@ app.post("/myPostUpdate/:id", postUploadboth, function (req, res, next) {
       });
 
       //`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`
-      res.redirect(new URL(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`));
+      res.redirect(new URL(`https://weberyday.netlify.app/#/main/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`));
     }
     else if (value[0].fieldname === "postBackgroundImg") {
       res.cookie("postBackgroundImg", value[0].location);
