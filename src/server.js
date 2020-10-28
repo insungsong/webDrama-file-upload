@@ -109,9 +109,6 @@ console.log(value);
         else console.log("data", data);
       });
 
-      const URL = `https://weberyday.netlify.app/#/myPostList/?postThumnail&s3PostThumnailId`;
-      console.log(URL);
-
       res.redirect(`https://weberyday.netlify.app/#/myPostList/${postId}?postThumnail=${value[0].location}&s3PostThumnailId=${value[0].key}`);
     }
     else if (value[0].fieldname === "postBackgroundImg") {
@@ -191,6 +188,9 @@ app.post("/myPostDelete", (req, res, next) => {
     else console.log("data", data);
   });
 });
+
+
+//////////////////////////////
 
 //작품 회차 등록할때
 app.post("/uploadEpisode/:id", episodeUploadboth, function (req, res, next) {
